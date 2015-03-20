@@ -18,7 +18,7 @@ var App = React.createClass({
                 <div className="formContainer">
                   <Form/>
                 </div>
-                <Button text={"Sign-in"} className="btn btn-awsm"/>
+                <Button text={"Sign in"} className="btn btn-awsm"/>
             </div>
               </div>
             </div>
