@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node web/index.js",
     "test": "lab -t 100",
-    "watch-css": "catw -c 'lessc $FILE' 'templates/less/styles.less' -o dist/bundle.css -v",
+    "watch-css": "catw -c 'lessc $FILE' 'templates/less/**/*.less' -o dist/styles.css -v",
     "build": "webpack --config webpack.config.js --progress --profile --colors",
     "watch-js": "webpack --config webpack.config.js --progress --profile --colors --watch",
     "watch": "npm run watch-css & npm run watch-js"
@@ -30,6 +30,7 @@
   "dependencies": {
     "boom": "^2.6.1",
     "catw": "^0.2.0",
+    "bootstrap": "^3.3.4",
     "es5-shim": "^4.1.0",
     "hapi": "^8.4.0",
     "hoek": "^2.11.1",
