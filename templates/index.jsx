@@ -1,33 +1,47 @@
 var React = require('react');
 
 var Form = require('./components/form.jsx');
-var Button = require('./components/button.jsx');
+var Header = require('./components/header.jsx');
 
 // This wraps every view
 var App = React.createClass({
   submitForm: function(e) {
-    console.log('asdasd');
+    console.log(e);
   },
   render: function() {
     return (
-        <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
-            <img src="/templates/img/logo.png" alt="logo" className="logo" />
-          </div>
-          <div className="col-md-6 col-md-offset-3">
-            <div className="title">
-              <h1>Build the web. Learn new skills.</h1>
-              <h2>Free and open source - forever.</h2>
+        <div>
+          <Header/>
+          <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-6 col-md-offset-3">
             </div>
-            <div className="mainContainer">
-                <div className="formContainer">
-                  <Form/>
-                </div>
-                <Button text={"Sign in"} className="btn btn-awsm" onClick={this.submitForm}/>
-            </div>
+            <div className="col-md-6 col-md-offset-3">
+              <div className="mainContainer">
+                  <div className="formContainer">
+                    <Form
+                      fields={
+                        [
+                          { 'username': {
+                              'placeholder': 'Enter username',
+                              'type': 'text'
+                            }
+                          },
+                          { 'password': {
+                              'placeholder': 'Enter password',
+                              'type': 'password'
+                            }
+                          }
+                        ]
+                      }
+                      btnTxt={"Log In"}
+                    />
+
+                  </div>
               </div>
-            </div>
+                </div>
+              </div>
+        </div>
       </div>
     );
   }

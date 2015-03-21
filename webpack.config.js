@@ -33,6 +33,10 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' }
     ]
   },
+  node: {
+    net: "empty",
+    dns: "empty"
+  },
   plugins: [
     new webpack.DefinePlugin(importEnvVars([
       // TODO: Define any variable we want to expose to the client here.

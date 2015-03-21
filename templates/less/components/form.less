@@ -26,4 +26,32 @@
       margin: 0 auto;
     }
   }
+.icon(@fa-icon) {
+  content: @fa-icon;
+  .fa();
+}
+
+.label(@fa-icon) {
+  .icon(@fa-icon);
+  color: #B5B1A6;
+  font-family: FontAwesome;
+  position: absolute;
+  top: 2px;
+  left: 13px;
+  font-size: 18px;
+}
+  .phone-label-username:before {
+    .label(@fa-username);
+  }
+  .phone-label-password:before {
+    .label(@fa-password);
+  }
+  .phone-label-email:before {
+    .label(@fa-email);
+  }
+  .phone-label-username,
+  .phone-label-password,
+  .phone-label-email {
+    position: relative;
+  }
 }

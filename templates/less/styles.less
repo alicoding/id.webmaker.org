@@ -1,4 +1,9 @@
 @import (less) "../../node_modules/bootstrap/dist/css/bootstrap.css";
+// Font awesome
+@import "../../node_modules/font-awesome/less/font-awesome";
+@fa-font-path: "../../node_modules/font-awesome/fonts";
+
+@import "mixins";
 @import "components/index";
 
 html, body {
@@ -9,8 +14,8 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.6rem;
   font-weight: 300;
-  background-color: #0185CD;
-  color: #FDFEFE;
+  background-color: #F6F6F6;
+  color: #464646;
   padding: 0;
   margin: 0;
 }
@@ -31,14 +36,4 @@ h2 {
 h3 {
   font-weight: 400;
   font-size: 1.6rem;
-}
-
-.title {
-  text-align: center;
-}
-
-.logo {
-  height: 60px;
-  margin-top: 30px;
-  margin-left: 20px;
 }
