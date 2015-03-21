@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node web/index.js",
     "test": "lab -t 100",
-    "watch-css": "catw -c 'lessc $FILE' 'templates/less/styles.less' -o dist/styles.css -v",
     "build": "webpack --config webpack.config.js --progress --profile --colors",
+    "build-less": "lessc --source-map templates/less/styles.less dist/styles.css",
+    "watch-css": "nodemon --watch templates/less -e less --exec 'npm run build-less'",
     "watch-js": "webpack --config webpack.config.js --progress --profile --colors --watch",
     "watch": "npm run watch-css & npm run watch-js & npm start & live-server"
   },
@@ -29,9 +30,7 @@
   "homepage": "https://github.com/mozilla/id.webmaker.org",
   "dependencies": {
     "boom": "^2.6.1",
-    "catw": "^0.2.0",
     "bootstrap": "^3.3.4",
-    "catw": "^0.2.0",
     "es5-shim": "^4.1.0",
     "font-awesome": "^4.3.0",
     "hapi": "^8.4.0",
@@ -43,9 +42,9 @@
     "jsx-loader": "^0.12.2",
     "less": "^2.4.0",
     "live-server": "^0.7.0",
+    "nodemon": "^1.3.7",
     "react": "^0.13.1",
     "react-validation-mixin": "^4.0.3",
-    "watch-less": "0.0.4",
     "webpack": "^1.7.3"
   },
   "devDependencies": {
