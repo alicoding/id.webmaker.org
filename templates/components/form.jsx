@@ -52,12 +52,10 @@ var Signup = React.createClass({
        );
      });
      return (
-        <div className="form-group">
-         <form role="form" onSubmit={this.handleSubmit}>
-            {fields}
-            <button type='submit' className="btn btn-awsm btn-now">{this.props.btnTxt}</button>
-         </form>
-       </div>
+       <form role="form" onSubmit={this.handleSubmit}>
+          {fields}
+          <button type='submit' className="btn btn-awsm">{this.props.btnTxt}</button>
+       </form>
      );
   },
   renderHelpText: function(message) {

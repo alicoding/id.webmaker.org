@@ -10,38 +10,28 @@ var App = React.createClass({
   },
   render: function() {
     return (
-        <div>
-          <Header/>
-          <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-6 col-md-offset-3">
-              <div className="mainContainer">
-                  <div className="formContainer">
-                  <div className="clearfix"></div>
-                    <Form
-                      fields={
-                        [
-                          { 'username': {
-                              'placeholder': 'Enter username',
-                              'type': 'text'
-                            }
-                          },
-                          { 'password': {
-                              'placeholder': 'Enter password',
-                              'type': 'password'
-                            }
-                          }
-                        ]
-                      }
-                      btnTxt={"Log In"}
-                    />
-
-                  </div>
-              </div>
-                </div>
-              </div>
+      <div>
+        <Header/>
+          <div className="formContainer">
+            <Form
+              fields={
+                [
+                  { 'username': {
+                      'placeholder': 'Username',
+                      'type': 'text'
+                    }
+                  },
+                  { 'password': {
+                      'placeholder': 'Password',
+                      'type': 'password'
+                    }
+                  }
+                ]
+              }
+              btnTxt={"Log In"}
+            />
+          </div>
         </div>
-      </div>
     );
   }
 });
