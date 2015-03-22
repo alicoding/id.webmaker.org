@@ -15,19 +15,25 @@
     background-color: white;
 
     input {
-      width: 230px;
+      width: 280px;
+      max-width: 90%;
       font-size: 16px;
       font-weight: 200;
-      padding-left: 44px;
+      padding-left: 38px;
       height: 55px;
       @media (min-width : 360px) and
       (max-width : 450px){
-        width: 260px;
+        width: 320px;
+        max-width: 90%;
       }
       @media (min-width : 451px) {
-        width: 340px;
+        width: 400px;
+        max-width: 90%;
       }
       margin: 0 auto;
+    }
+    label {
+      margin-bottom: 15px;
     }
   }
 .icon(@fa-icon) {
@@ -40,8 +46,8 @@
   color: #B5B1A6;
   font-family: FontAwesome;
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 18px;
+  left: 34px;
   font-size: 18px;
 }
   .phone-label-username:before {
@@ -60,5 +66,6 @@
   }
   .form-group {
     text-align: center;
+    display: inline-block;
   }
 }

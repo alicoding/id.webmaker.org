@@ -15,10 +15,9 @@ var App = React.createClass({
           <div className="container-fluid">
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-            </div>
-            <div className="col-md-6 col-md-offset-3">
               <div className="mainContainer">
                   <div className="formContainer">
+                  <div className="clearfix"></div>
                     <Form
                       fields={
                         [

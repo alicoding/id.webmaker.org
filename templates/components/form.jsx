@@ -42,22 +42,20 @@ var Signup = React.createClass({
        var type = that.props.fields[i][id].type;
 
        return (
-           <div className="form-group">
             <label className={that.getIconClass(id)}>
               <input key={id} type={type} id={id} placeholder={placeholder}
                 valueLink={that.linkState(id)} onBlur={that.handleValidation(id)}
                 className={that.getClasses(id)}
               />
+              {that.getValidationMessages(id).map(that.renderHelpText)}
             </label>
-             {that.getValidationMessages(id).map(that.renderHelpText)}
-           </div>
        );
      });
      return (
-       <div>
+        <div className="form-group">
          <form role="form" onSubmit={this.handleSubmit}>
-           {fields}
-           <button type='submit' className="btn btn-awsm">{this.props.btnTxt}</button>
+            {fields}
+            <button type='submit' className="btn btn-awsm btn-now">{this.props.btnTxt}</button>
          </form>
        </div>
      );
