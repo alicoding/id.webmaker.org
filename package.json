@@ -7,9 +7,9 @@
     "start": "node web/index.js",
     "test": "lab -t 100",
     "build": "webpack --config webpack.config.js --progress --profile --colors",
-    "watch-css": "nodemon web/index.js --watch templates/less -e less --exec 'lessc --source-map templates/less/styles.less public/styles.css'",
+    "watch-css": "node node_modules/autoless/bin/autoless --source-map templates/less public",
     "watch-js": "webpack --config webpack.config.js --progress --profile --colors --watch",
-    "watch": "npm start & npm run watch-css & npm run watch-js"
+    "watch": "node watch.js"
   },
   "repository": {
     "type": "git",
@@ -40,12 +40,12 @@
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
     "less": "^2.4.0",
-    "nodemon": "^1.3.7",
     "react": "^0.13.1",
     "react-validation-mixin": "^4.0.3",
     "webpack": "^1.7.3"
   },
   "devDependencies": {
+    "autoless": "^0.1.6",
     "code": "^1.3.0",
     "lab": "^5.5.0"
   }
