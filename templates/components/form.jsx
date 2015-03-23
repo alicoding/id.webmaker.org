@@ -52,9 +52,9 @@ var Signup = React.createClass({
        );
      });
      return (
-       <form role="form" onSubmit={this.handleSubmit}>
+       <form role="form">
           {fields}
-          <button type='submit' className="btn btn-awsm">{this.props.btnTxt}</button>
+          <button type='submit' onClick={this.handleSubmit} className="btn btn-awsm">{this.props.btnTxt}</button>
        </form>
      );
   },

@@ -9,7 +9,7 @@
     "build": "webpack --config webpack.config.js --progress --profile --colors",
     "watch-css": "nodemon web/index.js --watch templates/less -e less --exec 'lessc --source-map templates/less/styles.less public/styles.css'",
     "watch-js": "webpack --config webpack.config.js --progress --profile --colors --watch",
-    "watch": "npm start & npm run watch-css &  npm run watch-js"
+    "watch": "npm start & npm run watch-css & npm run watch-js"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,6 @@
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
     "less": "^2.4.0",
-    "live-server": "^0.7.0",
     "nodemon": "^1.3.7",
     "react": "^0.13.1",
     "react-validation-mixin": "^4.0.3",
