@@ -45,8 +45,12 @@
   color: #B5B1A6;
   font-family: FontAwesome;
   position: absolute;
-  top: 18px;
-  left: 40px;
+  top: 15px;
+  left: 30px;
+  @media (min-width : 451px) {
+    top: 16px;
+    left: 45px;
+  }
   font-size: 18px;
 }
   .phone-label-username:before {
@@ -63,6 +67,10 @@
   .phone-label-email {
     position: relative;
   }
+}
+.has-error {
+  border: 1px solid #E95B95;
+  background-color: #FEEDED;
 }
 @media (min-width : 451px) {
   .centerDiv {

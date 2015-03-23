@@ -60,13 +60,13 @@ var Signup = React.createClass({
   },
   renderHelpText: function(message) {
     return (
-      <span className="help-block">{message}</span>
+      <span className="help-block">Invalid Username or Password</span>
     );
   },
   getClasses: function(field) {
     return React.addons.classSet({
       'form-control': true,
-      'has-error': !this.isValid(field)
+      'has-error': !this.isValid(field),
     });
   },
   getIconClass: function(field) {
