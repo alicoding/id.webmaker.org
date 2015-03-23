@@ -9,7 +9,7 @@
     width: 400px;
   }
   border-radius: 7px;
-  padding: 30px 0 22px 0;
+  padding-top: 25px;
   margin-bottom: 30px;
   background-color: white;
 
@@ -27,12 +27,12 @@
     }
     @media (min-width : 451px) {
       width: 400px;
-      max-width: 90%;
+      max-width: 85%;
     }
     margin: 0 auto;
   }
   label {
-    margin-bottom: 15px;
+    margin-bottom: 4px;
   }
 
 .icon(@fa-icon) {
@@ -46,7 +46,7 @@
   font-family: FontAwesome;
   position: absolute;
   top: 18px;
-  left: 34px;
+  left: 40px;
   font-size: 18px;
 }
   .phone-label-username:before {
@@ -62,5 +62,17 @@
   .phone-label-password,
   .phone-label-email {
     position: relative;
+  }
+}
+@media (min-width : 451px) {
+  .centerDiv {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    height: 250px;
+    width: 400px;
   }
 }

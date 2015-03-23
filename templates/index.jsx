@@ -12,7 +12,7 @@ var App = React.createClass({
     return (
       <div>
         <Header/>
-          <div className="formContainer">
+          <div className="formContainer centerDiv">
             <Form
               fields={
                 [

@@ -21,7 +21,7 @@ module.exports = {
   },
   devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/public',
     filename: '[name].bundle.js'
   },
   module: {

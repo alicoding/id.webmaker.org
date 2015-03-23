@@ -7,10 +7,9 @@
     "start": "node web/index.js",
     "test": "lab -t 100",
     "build": "webpack --config webpack.config.js --progress --profile --colors",
-    "build-less": "lessc --source-map templates/less/styles.less dist/styles.css",
-    "watch-css": "nodemon --watch templates/less -e less --exec 'npm run build-less'",
+    "watch-css": "nodemon web/index.js --watch templates/less -e less --exec 'lessc --source-map templates/less/styles.less public/styles.css'",
     "watch-js": "webpack --config webpack.config.js --progress --profile --colors --watch",
-    "watch": "npm run watch-css & npm run watch-js & npm start & live-server"
+    "watch": "npm start & npm run watch-css &  npm run watch-js"
   },
   "repository": {
     "type": "git",
