@@ -3,6 +3,7 @@ var Router = require('react-router');
 var Route = Router.Route;
 var Link = Router.Link;
 var DefaultRoute = Router.DefaultRoute;
+var IndexStatic = require('../index-static.jsx');
 
 var urls = [];
 
@@ -29,7 +30,10 @@ module.exports = {
   },
   generateStatic: function(url, processString) {
     Router.run(routes, url, function(Handler) {
-      processString(React.renderToString(React.createElement(Handler, null)));
+      var el = React.createElement(Handler, null);
+      var html = React.renderToString(<IndexStatic content={el} />);
+      // var html = React.renderToStaticMarkup(<IndexStatic content={el} />);
+      processString(html);
     });
   }
 };
