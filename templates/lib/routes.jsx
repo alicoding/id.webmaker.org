@@ -3,15 +3,15 @@ var Router = require('react-router');
 var Route = Router.Route;
 var Link = Router.Link;
 var DefaultRoute = Router.DefaultRoute;
+var IndexStatic = require('../index-static.jsx');
 
 var urls = [];
 
 var routes = (
   <Route>
-    <Route name="reset-password" path="/reset-password"
-      handler={require('../pages/reset-password.jsx')}/>
-    <DefaultRoute name="login"
-      handler={require('../pages/login.jsx')}/>
+    <Route name="reset-password" path="/reset-password" handler={require('../pages/reset-password.jsx')}/>
+    <Route name="login"          path="/login"          handler={require('../pages/login.jsx')}/>
+    <DefaultRoute handler={require('../pages/login.jsx')}/>
   </Route>
 );
 
@@ -20,12 +20,20 @@ React.Children.forEach(routes.props.children, function(item) {
   urls.push(item.props.path || '/');
 });
 
-exports.URLS = urls;
-
-exports.routes = routes;
-
-exports.run = function(location, el) {
-  Router.run(routes, location, function(Handler, state) {
-    React.renderToString(<Handler/>, el);
-  });
+module.exports = {
+  URLS: urls,
+  routes: routes,
+  run: function(location, el) {
+    Router.run(routes, location, function(Handler, state) {
+      React.renderToString(<Handler/>, el);
+    });
+  },
+  generateStatic: function(url, processString) {
+    Router.run(routes, url, function(Handler) {
+      var el = React.createElement(Handler, null);
+      var html = React.renderToString(<IndexStatic content={el} />);
+      // var html = React.renderToStaticMarkup(<IndexStatic content={el} />);
+      processString(html);
+    });
+  }
 };
