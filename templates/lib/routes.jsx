@@ -1,0 +1,31 @@
+var React = require('react');
+var Router = require('react-router');
+var Route = Router.Route;
+var Link = Router.Link;
+var DefaultRoute = Router.DefaultRoute;
+
+var urls = [];
+
+var routes = (
+  <Route>
+    <Route name="reset-password" path="/reset-password"
+      handler={require('../pages/reset-password.jsx')}/>
+    <DefaultRoute name="login"
+      handler={require('../pages/login.jsx')}/>
+  </Route>
+);
+
+// TODO: come up with a better solution for nested route if we will ever have that.
+React.Children.forEach(routes.props.children, function(item) {
+  urls.push(item.props.path || '/');
+});
+
+exports.URLS = urls;
+
+exports.routes = routes;
+
+exports.run = function(location, el) {
+  Router.run(routes, location, function(Handler, state) {
+    React.renderToString(<Handler/>, el);
+  });
+};

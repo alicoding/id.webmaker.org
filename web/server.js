@@ -2,6 +2,7 @@ var Boom = require("boom");
 var Hapi = require('hapi');
 var Hoek = require('hoek');
 var Path = require('path');
+var Router = require(Path.join(__dirname, '../templates/lib/routes.jsx');
 
 module.exports = function(options) {
   var server = new Hapi.Server({
@@ -20,10 +21,8 @@ module.exports = function(options) {
     {
         method: 'GET',
         path: '/{param*}',
-        handler: {
-          directory: {
-              path: Path.join(__dirname, '../public')
-          }
+        handler: function(request, reply) {
+          Router.renderToString(request.params);
         }
     }, {
       method: 'GET',
