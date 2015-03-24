@@ -31,15 +31,15 @@ module.exports = function(options) {
   server.route([
     {
         method: 'GET',
-        path: '/login',
-        handler: ReactHandler("login")
+        path: '/{params*}',
+        handler: {
+          file: {
+            path: Path.join(__dirname, '../public/index.html')
+          }
+        }
     }, {
         method: 'GET',
-        path: '/reset-password',
-        handler: ReactHandler("reset-password")
-    }, {
-        method: 'GET',
-        path: '/{param*}',
+        path: '/assets/{param*}',
         handler: {
             directory: {
               path: Path.join(__dirname, '../public')

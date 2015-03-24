@@ -9,11 +9,11 @@ var IndexState = React.createClass({
           <meta charset="UTF-8" />
           <title>Webmaker Login V4</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="/styles.css" />
+          <link rel="stylesheet" href="/assets/styles.css" />
         </head>
         <body>
           {this.props.content}
-          <script src="/app.bundle.js"></script>
+          <script src="/assets/app.bundle.js"></script>
         </body>
       </html>
     );
