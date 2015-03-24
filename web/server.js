@@ -2,7 +2,10 @@ var Boom = require("boom");
 var Hapi = require('hapi');
 var Hoek = require('hoek');
 var Path = require('path');
-var Router = require(Path.join(__dirname, '../templates/lib/routes.jsx');
+
+// make sure we understand "jsx" files:
+require('node-jsx').install();
+var routes = require(Path.join(__dirname, '../templates/lib/routes.jsx'));
 
 module.exports = function(options) {
   var server = new Hapi.Server({
@@ -17,13 +20,32 @@ module.exports = function(options) {
     loginAPI: options.loginAPI
   });
 
+  var ReactHandler = function(request, reply) {
+    console.log("params: ", request.params);
+    var route = request.params.route || "";
+    routes.generateStatic("/" + route, function(html) {
+      console.log("received callback with data:", html);
+      reply(html);
+    });
+  };
+
   server.route([
     {
         method: 'GET',
+        path: '/',
+        handler: ReactHandler
+    }, {
+        method: 'GET',
         path: '/{param*}',
-        handler: function(request, reply) {
-          Router.renderToString(request.params);
+        handler: {
+            directory: {
+              path: Path.join(__dirname, '../public')
+            }
         }
+    }, {
+        method: 'GET',
+        path: '/{route}',
+        handler: ReactHandler
     }, {
       method: 'GET',
       path: '/login/oauth/authorize',
