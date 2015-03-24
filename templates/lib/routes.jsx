@@ -9,8 +9,8 @@ var urls = [];
 
 var routes = (
   <Route>
-    <Route name="reset-password" path="/reset-password/" handler={require('../pages/reset-password.jsx')}/>
-    <Route name="login"          path="/login/"          handler={require('../pages/login.jsx')}/>
+    <Route name="reset-password" path="/reset-password/?" handler={require('../pages/reset-password.jsx')}/>
+    <Route name="login"          path="/login/?"          handler={require('../pages/login.jsx')}/>
     <DefaultRoute handler={require('../pages/login.jsx')}/>
     <NotFoundRoute handler={require('../pages/404.jsx')}/>
   </Route>
