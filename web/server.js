@@ -3,6 +3,9 @@ var Hapi = require('hapi');
 var Hoek = require('hoek');
 var Path = require('path');
 
+var fs = require("fs");
+var skeletonHTML = fs.readFileSync("./public/index.html").toString("utf-8");
+
 // make sure we understand "jsx" files:
 require('node-jsx').install();
 var routes = require(Path.join(__dirname, '../templates/lib/routes.jsx'));
@@ -20,20 +23,25 @@ module.exports = function(options) {
     loginAPI: options.loginAPI
   });
 
-  var ReactHandler = function(request, reply) {
-    console.log("params: ", request.params);
-    var route = request.params.route || "";
-    routes.generateStatic("/" + route, function(html) {
-      console.log("received callback with data:", html);
-      reply(html);
-    });
+
+  var ReactHandler = function(route) {
+    return function(request, reply) {
+      routes.generateStatic("/" + route, function(html) {
+        console.log("received callback with data:", html);
+        reply(skeletonHTML.replace('  <script src="/app.bundle.js"></script>', html));
+      });
+    };
   };
 
   server.route([
     {
         method: 'GET',
-        path: '/',
-        handler: ReactHandler
+        path: '/login',
+        handler: ReactHandler("login")
+    }, {
+        method: 'GET',
+        path: '/reset-password',
+        handler: ReactHandler("reset-password")
     }, {
         method: 'GET',
         path: '/{param*}',
@@ -42,10 +50,6 @@ module.exports = function(options) {
               path: Path.join(__dirname, '../public')
             }
         }
-    }, {
-        method: 'GET',
-        path: '/{route}',
-        handler: ReactHandler
     }, {
       method: 'GET',
       path: '/login/oauth/authorize',
