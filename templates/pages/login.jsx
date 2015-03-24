@@ -27,8 +27,10 @@ var Login = React.createClass({
       <div>
         <Header />
         <div className="formContainer centerDiv">
-          <Form ref="userform" fields={fieldValues} />
-          <button onClick={this.processFormData} className="btn btn-awsm">{buttonText}</button>
+          <div className="innerForm">
+            <Form ref="userform" fields={fieldValues} />
+            <button onClick={this.processFormData} className="btn btn-awsm">{buttonText}</button>
+          </div>
         </div>
       </div>
     );
