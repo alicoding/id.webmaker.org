@@ -3,18 +3,6 @@ var Hapi = require('hapi');
 var Hoek = require('hoek');
 var Path = require('path');
 
-// make sure we understand "jsx" files:
-require('node-jsx').install();
-var routes = require(Path.join(__dirname, '../templates/lib/routes.jsx'));
-var ReactHandler = function(route) {
-  return function(request, reply) {
-    routes.generateStatic("/" + route, function(html) {
-      console.log("received callback with data:", html);
-      reply(html);
-    });
-  };
-};
-
 module.exports = function(options) {
   var server = new Hapi.Server({
     debug: options.debug
