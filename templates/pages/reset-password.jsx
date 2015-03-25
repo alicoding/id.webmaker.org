@@ -2,6 +2,7 @@ var React = require('react');
 
 var Form = require('../components/form.jsx');
 var Header = require('../components/header.jsx');
+var IconText = require('../components/icontext.jsx');
 
 var fieldValuesResetForm = [
   {
@@ -60,6 +61,7 @@ var ResetPassword = React.createClass({
         <button onClick={this.processFormData} className="btn btn-awsm">{currentBtnLabel}</button>
       </div>
     );
+
     if(this.state.submitForm && !this.state.email) {
       content = (
         <div>
@@ -77,6 +79,7 @@ var ResetPassword = React.createClass({
         <div className="formContainer centerDiv resetPassword">
           <div className="innerForm">
             {content}
+            <IconText header="test">This is <p>test</p> text O_O</IconText>
           </div>
         </div>
       </div>
