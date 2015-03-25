@@ -36,7 +36,7 @@ var fieldValues = [
 
 var validators = require('../lib/validatorset');
 var fieldValidators = validators.getValidatorSet(fieldValues);
-console.log(fieldValidators)
+
 var Signup = React.createClass({
 
   render: function() {

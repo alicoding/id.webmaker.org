@@ -20,10 +20,6 @@ var Form = React.createClass({
   validatorTypes: false,
   componentWillMount: function() {
     this.validatorTypes = this.props.validators;
-    console.log(this.validatorTypes)
-  },
-  componentWillUnmount: function () {
-    delete this.validatorTypes;
   },
   getInitialState: function() {
     return {
@@ -33,7 +29,8 @@ var Form = React.createClass({
     };
   },
   buildFormElement: function(key, i) {
-    var id = Object.keys(this.props.fields[i]);
+    // we always expect this.props.fields[i] to be one object with one property.
+    var id = Object.keys(this.props.fields[i])[0];
     var placeholder = this.props.fields[i][id].placeholder;
     var type = this.props.fields[i][id].type;
     var label = this.props.fields[i][id].label;

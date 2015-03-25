@@ -1,9 +1,10 @@
 var Joi = require('joi');
 
 var fieldValidators = {
-  username: Joi.string().alphanum().min(1).required().label('Username'),
-  password: Joi.string().min(8).required().label('Password'),
-  email:    Joi.string().email().required().label('Email')
+  username:       Joi.string().alphanum().min(1).required().label('Username'),
+  password:       Joi.string().min(8).required().label('Password'),
+  verifyPassword: Joi.any().valid(Joi.ref('password')).required().label('Password Confirmation'),
+  email:          Joi.string().email().required().label('Email')
 };
 
 module.exports = {
@@ -16,6 +17,6 @@ module.exports = {
         }
       });
     });
-    return fieldValidators;
+    return validators;
   }
 };
