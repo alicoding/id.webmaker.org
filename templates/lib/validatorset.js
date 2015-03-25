@@ -1,8 +1,8 @@
 var Joi = require('joi');
 
 var fieldValidators = {
-  username: Joi.string().min(1).required().label('Username'),
-  password: Joi.string().min(3).required().label('Password'),
+  username: Joi.string().alphanum().min(1).required().label('Username'),
+  password: Joi.string().min(8).required().label('Password'),
   email:    Joi.string().email().required().label('Email')
 };
 

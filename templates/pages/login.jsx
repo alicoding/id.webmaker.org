@@ -8,14 +8,16 @@ var fieldValues = [
     'username': {
       'placeholder': 'Username',
       'type': 'text',
-      'validator': 'username'
+      'validator': 'username',
+      'errorMessage': 'Invalid username'
     }
   },
   {
     'password': {
       'placeholder': 'Password',
       'type': 'password',
-      'validator': 'password'
+      'validator': 'password',
+      'errorMessage': 'Invalid password'
     }
   }
 ];

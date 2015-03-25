@@ -9,7 +9,8 @@ var Form = React.createClass({
       'iconLabels': {
         'username': 'icon-label-username',
         'password': 'icon-label-password',
-        'email':    'icon-label-email'
+        'email':    'icon-label-email',
+        'error':    'icon-label-error'
       }
   },
   mixins: [
@@ -19,6 +20,10 @@ var Form = React.createClass({
   validatorTypes: false,
   componentWillMount: function() {
     this.validatorTypes = this.props.validators;
+    console.log(this.validatorTypes)
+  },
+  componentWillUnmount: function () {
+    delete this.validatorTypes;
   },
   getInitialState: function() {
     return {
@@ -33,7 +38,7 @@ var Form = React.createClass({
     var type = this.props.fields[i][id].type;
     var label = this.props.fields[i][id].label;
     var labelPosition = this.props.fields[i][id].labelPosition;
-    var className = this.getIconClass(id);
+    var errorMessage = this.props.fields[i][id].errorMessage;
 
     var input = (
       <input type={type}
@@ -41,7 +46,11 @@ var Form = React.createClass({
              placeholder={placeholder}
              valueLink={this.linkState(id)}
              onBlur={this.handleValidation(id)}
-             className={this.getClasses(id)} />
+             className={this.getInputClasses(id)} />
+    );
+
+    var errorTooltip = (
+      <span className="warning">{errorMessage}</span>
     );
 
     if (type === 'checkbox') {
@@ -49,7 +58,8 @@ var Form = React.createClass({
     }
 
     return (
-     <label className={className} key={id} htmlFor={id}>
+     <label className={this.getInLabelClasses(id)} key={id} htmlFor={id}>
+        {!this.isValid(id) ? errorTooltip : ''}
         {label && labelPosition==='before' ? label : false}
         {input}
         {label && labelPosition==='after' ? label : false}
@@ -60,11 +70,17 @@ var Form = React.createClass({
      var fields = Object.keys(this.props.fields).map(this.buildFormElement);
      return <div role="form">{fields}</div>;
   },
-  getClasses: function(field) {
+  getInputClasses: function(field) {
     return React.addons.classSet({
       'form-control': true,
-      'has-error': !this.isValid(field),
+      'has-error': !this.isValid(field)
     });
+  },
+  getInLabelClasses: function(field) {
+    var classes = {};
+    classes[this.getIconClass(field)] = true;
+    classes[this.getIconClass('error')] = !this.isValid(field);
+    return React.addons.classSet(classes);
   },
   getIconClass: function(field) {
     return Form.iconLabels[field];

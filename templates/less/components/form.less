@@ -27,34 +27,36 @@
     padding-bottom: 10px;
   }
 
-  .icon(@fa-icon) {
-    content: @fa-icon;
-    .fa();
+  .leftIcon() {
+    z-index: 1;
+    top: 18px;
+    left: 15px;
   }
 
-  .label(@fa-icon) {
-    .icon(@fa-icon);
-    color: #B5B1A6;
-    font-family: FontAwesome;
-    position: absolute;
-    top: 16px;
-    left: 5%;
-    font-size: 18px;
-  }
-
-  .icon-label-username:before {
-    .label(@fa-username);
-  }
-  .icon-label-password:before {
-    .label(@fa-password);
-  }
-  .icon-label-email:before {
-    .label(@fa-email);
-  }
   .icon-label-username,
   .icon-label-password,
   .icon-label-email {
     position: relative;
+  }
+
+  .icon-label-username:before {
+    .label(@fa-username);
+    .leftIcon()
+  }
+  .icon-label-password:before {
+    .label(@fa-password);
+    .leftIcon()
+  }
+  .icon-label-email:before {
+    .label(@fa-email);
+    .leftIcon()
+  }
+
+  .icon-label-error:after {
+    .label(@fa-warn);
+    right: 10px;
+    top: 17px;
+    color: #e7518f;
   }
 }
 .has-error {
@@ -64,6 +66,7 @@
 .innerForm {
   float: right;
   padding: 0px 30px;
+  width: 100%;
 }
 @media (min-width : 451px) {
   .centerDiv {
@@ -75,4 +78,32 @@
     margin: auto;
     width: 400px;
   }
+}
+
+
+.warning:before {
+  content: '';
+  position: absolute;
+  background: transparent;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #e7518f;
+  position: absolute;
+  top: 100%;
+  right: 10%;
+}
+
+// block container
+.warning {
+  position: relative;
+  background: #e7518f;
+  color: white;
+  padding: 8px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  border-radius: 5px;
+  line-height: 8px;
 }
