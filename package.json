@@ -1,4 +1,4 @@
-a{
+{
   "name": "id.webmaker.org",
   "version": "1.0.0",
   "description": "OAuth 2.0 identity provider for Webmaker https://id.webmaker.org",
