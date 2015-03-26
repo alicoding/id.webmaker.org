@@ -27,7 +27,8 @@ var Form = React.createClass({
       username: null,
       password: null,
       email: null,
-      checked: false
+      checked: false,
+      dirty: {}
     };
   },
   buildFormElement: function(key, i) {
@@ -43,20 +44,21 @@ var Form = React.createClass({
     var focus = this.props.fields[i][id].focus;
     var username = this.props.fields[i][id].username;
     this.passChecked = this.props.fields[i][id].checked;
-    var dirty = false;
-    var dirty = function () {console.log('here')
-      dirty = true
-      self.handleValidation(id, self.formSuccess);
-      console.log('after', dirty)
+
+    function dirty(err, valid) {
+      var state = self.state.dirty;
+      state[id] = true;
+      self.setState({dirty: state});
     }
+
     var input = (
       <input type={type}
              id={id}
              ref={id+'Input'}
              placeholder={placeholder}
              valueLink={this.linkState(id)}
-             onBlur={dirty=true && self.handleValidation(id, self.formSuccess)}
-             className={this.getInputClasses(id, dirty)}
+             onBlur={this.handleValidation(id, dirty)}
+             className={this.getInputClasses(id)}
              defaultValue={username}
              disabled={isDisabled ? "disabled" : false}
              autoFocus={focus ? true : false}
@@ -84,18 +86,16 @@ var Form = React.createClass({
      var fields = Object.keys(this.props.fields).map(this.buildFormElement);
      return <div role="form">{fields}</div>;
   },
-  formSuccess: function(err, valid) {
-    // console.log(this.refs.label)
-  },
-  getInputClasses: function(field, dirty) {console.log(this.refs)
+  getInputClasses: function(field) {
+    var ref = this.refs[field + 'Input'];
     return React.addons.classSet({
       'form-control': true,
       'has-error': !this.isValid(field),
       'is-valid': this.isValid(field),
-      'valid': dirty && this.isValid(field)
+      'dirty': this.state.dirty[field]
     });
   },
-  getInLabelClasses: function(field) {console.log(this.refs)
+  getInLabelClasses: function(field) {
     var classes = {};
     // console.log(this.refs)
     classes[this.getIconClass(field)] = true;
