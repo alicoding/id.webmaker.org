@@ -10,7 +10,8 @@ var Form = React.createClass({
         'username': 'icon-label-username',
         'password': 'icon-label-password',
         'email':    'icon-label-email',
-        'error':    'icon-label-error'
+        'error':    'icon-label-error',
+        'valid':    'icon-label-valid'
       }
   },
   mixins: [
@@ -25,25 +26,41 @@ var Form = React.createClass({
     return {
       username: null,
       password: null,
-      email: null
+      email: null,
+      checked: false
     };
   },
   buildFormElement: function(key, i) {
     // we always expect this.props.fields[i] to be one object with one property.
+    var self = this;
     var id = Object.keys(this.props.fields[i])[0];
     var placeholder = this.props.fields[i][id].placeholder;
     var type = this.props.fields[i][id].type;
     var label = this.props.fields[i][id].label;
     var labelPosition = this.props.fields[i][id].labelPosition;
     var errorMessage = this.props.fields[i][id].errorMessage;
-
+    var isDisabled = this.props.fields[i][id].disabled;
+    var focus = this.props.fields[i][id].focus;
+    var username = this.props.fields[i][id].username;
+    this.passChecked = this.props.fields[i][id].checked;
+    var dirty = false;
+    var dirty = function () {console.log('here')
+      dirty = true
+      self.handleValidation(id, self.formSuccess);
+      console.log('after', dirty)
+    }
     var input = (
       <input type={type}
              id={id}
+             ref={id+'Input'}
              placeholder={placeholder}
              valueLink={this.linkState(id)}
-             onBlur={this.handleValidation(id)}
-             className={this.getInputClasses(id)} />
+             onBlur={dirty=true && self.handleValidation(id, self.formSuccess)}
+             className={this.getInputClasses(id, dirty)}
+             defaultValue={username}
+             disabled={isDisabled ? "disabled" : false}
+             autoFocus={focus ? true : false}
+      />
     );
 
     var errorTooltip = (
@@ -55,7 +72,7 @@ var Form = React.createClass({
     }
 
     return (
-     <label className={this.getInLabelClasses(id)} key={id} htmlFor={id}>
+     <label ref={id+'Label'} className={this.getInLabelClasses(id)} key={id} htmlFor={id}>
         {!this.isValid(id) ? errorTooltip : ''}
         {label && labelPosition==='before' ? label : false}
         {input}
@@ -67,16 +84,23 @@ var Form = React.createClass({
      var fields = Object.keys(this.props.fields).map(this.buildFormElement);
      return <div role="form">{fields}</div>;
   },
-  getInputClasses: function(field) {
+  formSuccess: function(err, valid) {
+    // console.log(this.refs.label)
+  },
+  getInputClasses: function(field, dirty) {console.log(this.refs)
     return React.addons.classSet({
       'form-control': true,
-      'has-error': !this.isValid(field)
+      'has-error': !this.isValid(field),
+      'is-valid': this.isValid(field),
+      'valid': dirty && this.isValid(field)
     });
   },
-  getInLabelClasses: function(field) {
+  getInLabelClasses: function(field) {console.log(this.refs)
     var classes = {};
+    // console.log(this.refs)
     classes[this.getIconClass(field)] = true;
     classes[this.getIconClass('error')] = !this.isValid(field);
+    // classes[this.getIconClass('valid')] = (this.isValid(field))|| this.passChecked;
     return React.addons.classSet(classes);
   },
   getIconClass: function(field) {

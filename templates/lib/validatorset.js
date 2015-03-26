@@ -11,8 +11,9 @@ module.exports = {
   getValidatorSet: function (fieldValues) {
     var validators = {};
     fieldValues.forEach(function(entry) {
+      var isDisabled = entry[Object.keys(entry)].disabled;
       Object.keys(entry).forEach(function(name) {
-        if (fieldValidators[name]) {
+        if (!isDisabled && fieldValidators[name]) {
           validators[name] = fieldValidators[name];
         }
       });

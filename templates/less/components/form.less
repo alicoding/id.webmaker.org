@@ -1,6 +1,6 @@
 .formContainer {
   width: 290px;
-  height: 250px;
+  height: 280px;
   margin: 0 auto;
   @media (min-width : 360px) and
   (max-width : 450px){
@@ -8,6 +8,7 @@
   }
   @media (min-width : 451px) {
     width: 400px;
+    height: 250px;
   }
   border-radius: 7px;
   padding-top: 25px;
@@ -58,15 +59,27 @@
     top: 17px;
     color: #e7518f;
   }
+  .icon-label-valid:after {
+    .label(@fa-check);
+    right: 10px;
+    top: 17px;
+    color: #53C0A3;
+  }
 }
 .has-error {
-  border: 1px solid #E95B95;
+  border: 1px solid #E95B95 !important;
   background-color: #FEEDED;
+  box-shadow: none;
 }
+
 .innerForm {
   float: right;
   padding: 0px 30px;
   width: 100%;
+  text-align: center;
+  @media (min-width : 451px) {
+    text-align: right;
+  }
 }
 @media (min-width : 451px) {
   .centerDiv {
@@ -106,4 +119,8 @@
   right: 0;
   border-radius: 5px;
   line-height: 8px;
+}
+
+.need-help {
+  padding: 10px 20px 0 0;
 }

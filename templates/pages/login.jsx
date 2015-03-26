@@ -1,4 +1,6 @@
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Form = require('../components/form.jsx');
 var Header = require('../components/header.jsx');
@@ -37,6 +39,7 @@ var Login = React.createClass({
         <div className="formContainer centerDiv">
           <div className="innerForm">
             <Form ref="userform" fields={fieldValues} validators={fieldValidators} />
+            <Link to="reset-password" className="need-help">Need help?</Link>
             <button onClick={this.processFormData} className="btn btn-awsm">{buttonText}</button>
           </div>
         </div>
