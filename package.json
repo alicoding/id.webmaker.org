@@ -1,0 +1,92 @@
+{
+  "name": "id.webmaker.org",
+  "version": "1.0.0",
+  "description": "OAuth 2.0 identity provider for Webmaker https://id.webmaker.org",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel server watch:css watch:js ",
+    "test": "npm run test:server && npm run test:browser && npm run lint",
+    "build": "npm run build:css && npm run build:js",
+    "build:production": "npm run build:css && npm run build:js -- --optimize-minimize --optimize-dedupe",
+    "build:css": "npm run watch:css -- --no-watch",
+    "build:js": "webpack --config webpack.config.js --progress --profile --colors",
+    "jscs": "jscs -c node_modules/mofo-style/linters/.jscsrc lib test web webpack.config.js",
+    "jshint": "jshint -c node_modules/mofo-style/linters/.jshintrc lib test web webpack.config.js",
+    "jsbeautify": "js-beautify lib test web *.js -r",
+    "lint": "npm run jshint && npm run jscs",
+    "postinstall": "node scripts/build",
+    "pretest:browser": "ncp node_modules/mocha/mocha.js public/tests/mocha.js && ncp node_modules/mocha/mocha.css public/tests/mocha.css",
+    "test:browser": "npm run build && mocha-phantomjs -s loadImages=false public/tests/index.html",
+    "test:server": "lab -t 95",
+    "watch:js": "npm run build:js -- --watch",
+    "watch:css": "autoless --source-map templates/less public",
+    "server": "node web/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozilla/id.webmaker.org"
+  },
+  "keywords": [
+    "OAuth",
+    "webmaker",
+    "id.webmaker.org",
+    "login"
+  ],
+  "author": "Webmaker",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mozilla/id.webmaker.org/issues"
+  },
+  "homepage": "https://github.com/mozilla/id.webmaker.org",
+  "dependencies": {
+    "autoless": "^0.1.6",
+    "babel-loader": "^5.0.0",
+    "boom": "^2.6.1",
+    "bootstrap": "^3.3.4",
+    "cookie-js": "0.0.1",
+    "cross-spawn": "^0.2.9",
+    "crumb": "^4.0.3",
+    "es5-shim": "^4.1.0",
+    "es6-promise": "^2.0.1",
+    "flux": "^2.0.1",
+    "font-awesome": "^4.3.0",
+    "habitat": "^3.1.2",
+    "hapi": "^8.4.0",
+    "hapi-auth-cookie": "^2.0.0",
+    "hoek": "^2.11.1",
+    "hyperquest": "^1.0.1",
+    "imports-loader": "^0.6.3",
+    "isomorphic-fetch": "^2.0.1",
+    "joi": "^6.0.8",
+    "jsx-loader": "^0.12.2",
+    "pass-test": "0.0.5",
+    "react": "^0.12.2",
+    "react-ga": "^1.0.10",
+    "react-router": "^0.12.4",
+    "react-router-stub": "0.0.6",
+    "react-router-viewports": "0.0.4",
+    "react-validation-mixin": "^4.0.3",
+    "should": "^5.2.0",
+    "webpack": "^1.7.3"
+  },
+  "devDependencies": {
+    "bulk-require": "^0.2.1",
+    "code": "^1.3.0",
+    "js-beautify": "^1.5.5",
+    "jscs": "^1.11.3",
+    "jshint": "^2.6.3",
+    "json-loader": "^0.5.1",
+    "lab": "^5.5.0",
+    "less": "^2.4.0",
+    "mocha": "^2.2.1",
+    "mocha-phantomjs": "^3.5.3",
+    "mofo-style": "latest",
+    "ncp": "^2.0.0",
+    "npm-run-all": "^1.1.3",
+    "phantomjs": "^1.9.16"
+  },
+  "engines": {
+    "npm": "^2.5.1",
+    "node": "^0.12.1"
+  }
+}
