@@ -106,9 +106,6 @@ var Signup = React.createClass({
     if( fieldName === 'username' && value ) {
       userform.checkUsername(value);
     }
-    if( fieldName === 'password' && value ) {
-      userform.validatePassword(value);
-    }
   },
   handleFormData: function(data) {
     var error = data.err;

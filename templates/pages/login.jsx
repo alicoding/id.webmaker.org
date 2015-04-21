@@ -86,6 +86,9 @@ var Login = React.createClass({
       this.queryObj.username = value;
       userform.checkUsername(value);
     }
+    if ( fieldName === 'password' && value ) {console.log(value)
+      userform.setFormState({field: 'password'});
+    }
   },
   handleFormData: function(data) {
     var data = data.user;

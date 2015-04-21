@@ -1,9 +1,9 @@
 var React = require('react/addons');
-var ValidationMixin = require('react-validation-mixin');
 var ga = require('react-ga');
 var ToolTip = require('../tooltip/tooltip.jsx');
 var WebmakerActions = require('../../lib/webmaker-actions.jsx');
 var API = require('../../lib/api.jsx');
+var FormValidation = require('./form-validation.jsx');
 var Router = require('react-router');
 
 var Form = React.createClass({
@@ -23,11 +23,11 @@ var Form = React.createClass({
       }
   },
   mixins: [
-    ValidationMixin,
     React.addons.LinkedStateMixin,
     Router.Navigation,
     Router.State,
-    API
+    API,
+    FormValidation
   ],
   validatorTypes: false,
   componentWillMount: function() {
@@ -75,37 +75,12 @@ var Form = React.createClass({
       errorMessage: errorMessage
     });
   },
-  dirty: function(id, origin) {
-    return (err, valid) => {
-      if(err) {
-        if(id === 'email') {
-          this.formError({field: 'email', message: 'Please use a valid email address.'});
-        }
-        if(id === 'password' && !this.state[id]) {
-          this.formError({field: 'password', message: 'Please specify a password.'});
-        }
-        ga.event({category: origin, action: 'Validation Error', label: 'Error on ' + id + ' field.'});
-      }
-      if(!err && id === 'email') {
-        this.setFormState({field: 'email'});
-      }
-
-      if(id === 'password' && this.state[id] && err) {
-        this.setFormState({field: 'password'});
-      }
-      this.handleBlur(id, this.state[id])
-    }
-  },
-  handleBlur: function(fieldName, value) {
-   if ( this.props.onInputBlur ) {
-     this.props.onInputBlur(fieldName, value);
-    }
-    var dirty = this.state.dirty;
-    dirty[fieldName] = true;
-    this.setState({
-      dirty: dirty
-    });
-
+  handleBlur: function(fieldName, origin) {
+    return (err) => {console.log(err)
+      if ( this.props.onInputBlur ) {
+        this.props.onInputBlur(fieldName, this.state[fieldName]);
+       }
+     }
   },
   buildFormElement: function(key, i) {
     // we always expect this.props.fields[i] to be one object with one property.
@@ -127,7 +102,7 @@ var Form = React.createClass({
              autoComplete={this.props.autoComplete ? this.props.autoComplete : "on"}
              valueLink={this.linkState(id)}
              defaultValue={this.props.defaultUsername}
-             onBlur={this.handleValidation(id, this.dirty(id, this.props.origin))}
+             onBlur={this.handleValidation(id, this.handleBlur(id, this.props.origin))}
              className={this.getInputClasses(id, isValid)}
              disabled={value.disabled ? "disabled" : false}
              autoFocus={value.focus ? true : false}
@@ -144,7 +119,7 @@ var Form = React.createClass({
                role='checkbox'
                aria-checked='false'
                onChange={this.toggleCheckBox}
-               onBlur={this.handleValidation(id, this.dirty(id, this.props.origin))}
+               onBlur={this.handleValidation(id, this.handleBlur(id, this.props.origin))}
                className={this.getInputClasses(id, isValid)}
         />
       );
@@ -154,7 +129,7 @@ var Form = React.createClass({
     if(id === 'password') {
       errorMessage = this.state.errorMessage[id] || passwordError;
     } else {
-      errorMessage = this.state.errorMessage[id] || this.getValidationMessages(id)[0];
+      errorMessage = this.state.errorMessage[id];
     }
     var errorTooltip = <ToolTip ref="tooltip" className="warning" message={errorMessage}/>;
 
